@@ -9,6 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 const port = 7647
 
+// app.set('views', 'static/views');
+app.set('view engine', 'pug');
+
 var mysql = require("mysql");
 let connection = null
 
@@ -118,7 +121,18 @@ app.get('/stocks.css', (req, res) => {
 app.get('/stocks.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'static', 'js', 'stocks.js'));
 });
-
+app.get('/editSchedule/:id', (req, res) => {
+  const eventId = req.params.id;
+	console.log("Get id: " + eventId);
+  const eventInfo = {id : eventId,
+    name : "VA Kant",
+    address: "123 Lakeview Drive",
+    info: "Mr Kant is a 4131 instructor",
+    email: "vakant@umn.edu",
+    url: "www.umn.edu",
+   }
+  res.render(path.join(__dirname, 'views', 'editForm.pug'), eventInfo);
+});
 
 app.use((req, res, next) => {
   res.status(404).sendFile(path.join(__dirname, 'static', 'html', '404.html'));
