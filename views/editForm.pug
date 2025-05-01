@@ -1,61 +1,60 @@
 doctype html
-html(lang='en')
-    head
-        meta(charset='UTF-8')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        title Edit Event
-        link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH', crossorigin='anonymous')
-    body
-        header.navbar.navbar-expand-sm.bg-body-tertiary
-            nav.container
-                a.navbar-brand(href='#') CSCI 4131 Assignment 6
-                button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-                    span.navbar-toggler-icon
-                #navbarSupportedContent.collapse.navbar-collapse
-                    ul.navbar-nav.me-auto.mb-2.mb-sm-0.flex-grow-1
-                        li.nav-item
-                            a.nav-link(href='/schedule.html') Schedule
-                        li.nav-item.ms-auto
-                            a.nav-link.active(href='/add-event.html', aria-current='page') Add Event
-        main.container
-            form.align-content-center.needs-validation(method='post', action=`/edit-schedule/${id}`, novalidate='')
-                .form-floating.mb-3
-                    input#name.form-control(type='text', name='name', pattern='^(?! )[A-Za-z0-9 ]+(?<! )$', title='Name must be alphanumeric', required='', placeholder='John Smith', value=`${name}`)
-                    label.form-label(for='name') Name
-                    .valid-feedback
-                        | Looks good!
-                    .invalid-feedback
-                        | Your name must be alphanumeric and not contain leading or trailing spaces.
-                .form-floating.mb-3
-                    input#address.form-control(type='text', name='address', required='', placeholder='Main Street', value=`${address}`)
-                    label.form-label(for='address') Location
-                    .valid-feedback
-                        | Looks good!
-                    .invalid-feedback
-                        | Please provide an address.
-                .form-floating.mb-3
-                    input#info.form-control(type='text', name='info', required='', placeholder='', value=`${info}`)
-                    label.form-label(for='info') Contact Information
-                    .valid-feedback
-                        | Looks good!
-                    .invalid-feedback
-                        | Please provide some contact information.
-                .form-floating.mb-3
-                    input#email.form-control(type='email', name='email', required='', placeholder='example@domain.com', value=`${email}`)
-                    label.form-label(for='email') Email
-                    .valid-feedback
-                        | Looks good!
-                    .invalid-feedback
-                        | Please provide a valid email.
-                .form-floating.mb-3
-                    input#url.form-control(type='url', name='url', required='', placeholder='https://example.com', value=`${url}`)
-                    label.form-label(for='url') Website
-                    .valid-feedback
-                        | Looks good!
-                    .invalid-feedback
-                        | Please provide a valid url.
-                .mb-3
-                    button.btn.btn-primary(type='submit')
-                        | Edit Event
-        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz', crossorigin='anonymous')
-        script(src='/js/bootstrap-form-validation.js')
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title my Form
+    link(rel="stylesheet", href="/myform.css")
+  body
+    div.filling-form
+      h1 Edit Schedule
+      form#schedule-form
+        table
+          tr
+            th
+              label(for="day") Day
+            th
+              select#day(name="day", required)
+                option(value="", disabled, selected) Select a day
+                option(value="Sun") Sunday
+                option(value="Mon") Monday
+                option(value="Tue") Tuesday
+                option(value="Wed") Wednesday
+                option(value="Thu") Thursday
+                option(value="Fri") Friday
+                option(value="Sat") Saturday
+          tr
+            th
+              label(for="event") Event
+            th
+              input#event(type="text", pattern="[A-Za-z0-9\\s]+", name="event", title="Event must be alphanumeric", required)
+          tr
+            th
+              label(for="startTime") Start Time:
+            th
+              input#startTime(name="startTime", type="time", required)
+          tr
+            th
+              label(for="endTime") End Time:
+            th
+              input#endTime(name="endTime", type="time", required)
+          tr
+            th
+              label(for="location") Event Location (Virtual or Physical):
+            th
+              input#location(type="text", pattern="[A-Za-z0-9\\s]+", name="location", title="Event must be alphanumeric", required)
+          tr
+            th
+              label(for="phone") Phone Number:
+            th
+              input#phone(type="text", name="phone", pattern="[0-9]{10}", title="Phone number must contain 10 digits", required)
+          tr
+            th
+              label(for="url") event info URL:
+            th
+              input#url(type="url", name="url", required)
+          tr
+            th
+            th
+              input.submit-button(type="submit", value="Add Event")
+        script(src="myform.js")
