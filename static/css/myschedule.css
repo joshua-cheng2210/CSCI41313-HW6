@@ -1,0 +1,131 @@
+.nav-container {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: #7acfe4;
+	width: 100%;
+    z-index: 1000;
+}
+
+.nav-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row-reverse;
+} 
+
+.nav-container li {
+    list-style: none;
+    margin: 2em 2em 1em 4em;
+}
+
+.nav-container a {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: grey;
+    font-weight: bold;
+}
+
+
+body{
+    padding-top: 3em;
+}
+
+.schedule-head{
+    background-color: #c3dde4;
+}
+
+.schedule-picture-container{
+    display: grid;
+    /* grid-template-columns: 60% 40%; */
+}
+.schedule-table{
+    /* height: 500px; */
+    overflow-y: auto;
+}
+.schedule-table tr:nth-child(even) {
+    background-color: #c3dde4;
+}
+
+.schedule-table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+.location-thumbnail {
+    display: none;
+}
+
+.schedule-row:hover .location-thumbnail {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
+/* #gym-exercise {
+    background: green;
+} */
+
+/* tr{
+    font-size: green;
+} */
+
+.scheduleImageContainer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+.scheduleImageSlideshowButton {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+.startSlideshow{
+    float: left;
+}
+.StopSlideshow{
+    float: right;
+}
+
+#schedule-image{
+    /* max-width: 400px; */
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+}
+.googleMaps-inputForm{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 25% 60% 15%;;
+}
+
+#directionsPanel{
+    float:left;
+    /* width:30%; */
+    height:500px;
+    overflow-y:scroll;
+    border:2px solid black;
+}
+
+#maps{
+    height: 500px; 
+    width: 100%; 
+    border: 2px solid black;
+}
+.inputForm{
+    padding: 10px;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}

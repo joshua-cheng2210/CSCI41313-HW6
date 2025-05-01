@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my Form</title>
+    <link rel="stylesheet" href="/myform.css">
+</head>
+<body>
+    <!-- navigation bar -->
+    <div>
+        <nav class="nav-container">
+            <nav>
+              <ul>
+                <li><a href="aboutme.html">About Me</a></li>
+                <li><a href="myschedule.html">mySchedule</a></li>
+                <li><a href="myform.html">myForm</a></li>
+                <li><a href="stocks.html">myStocks</a></li>
+            </ul>
+            </nav>
+        </nav>
+    </div>
+    <!-- form to fill -->
+    <div class="filling-form">
+        <h1>update Schedule</h1>
+
+        <form id="schedule-form">
+
+            <table>
+                <tr>
+                    <th><label for="day">Day</label></th>
+                    <th>
+                        <select id="day" name="day" required>
+                        <option value="" disabled selected>Select a day</option>
+                        <option value="Sun">Sunday</option>
+                        <option value="Mon">Monday</option>
+                        <option value="Tue">Tuesday</option>
+                        <option value="Wed">Wednesday</option>
+                        <option value="Thu">Thursday</option>
+                        <option value="Fri">Friday</option>
+                        <option value="Sat">Saturday</option>
+                        </select>
+                        
+                    </th>
+                </tr>
+
+                <tr>
+                    <th><label for="event">Event</label></th>
+                    <th><input type="text" id="event" pattern="[A-Za-z0-9\s]+" name="event" title="Event must be alphanumeric" required></th>
+                </tr>
+
+                <tr>
+                    <th><label for="startTime">Start Time:</label></th>
+                    <th><input id="startTime" name="startTime" type="time" required></th>
+                </tr>
+                <tr>
+                    <th><label for="endTime">End Time:</label></th>
+                    <th><input id="endTime" name="endTime" type="time" required></th>
+                </tr>
+
+                <tr>
+                    <th><label for="location">Event Location (Virtual or Physical):</label></th>
+                    <th><input type="text" id="location" pattern="[A-Za-z0-9\s]+" name="location" title="Event must be alphanumeric" required></th>
+                </tr>
+
+                <tr>
+                    <th><label for="phone">Phone Number:</label></th>
+                    <th><input type="text" id="phone" name="phone"  pattern="[0-9]+{10,10}" title="Phone number must contain 10 digits" required></th>
+                </tr>
+
+                <tr>
+                    <th><label for="url">event info URL:</label></th>
+                    <th><input type="url" id="url" name="url" required></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th><input class="submit-button" type="submit" value="Add Event"></th>
+                </tr>
+
+            </table>
+            
+            <script src="myform.js"></script>
+        </form>
+    </div>
+</body>
+</html>

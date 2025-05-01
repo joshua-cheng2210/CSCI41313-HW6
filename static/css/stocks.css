@@ -1,0 +1,64 @@
+.nav-container {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: #7acfe4;
+	width: 100%;
+    z-index: 1000;
+    /* height: 5em; */
+	/* margin: 0 auto; */
+    /* float: right; */
+}
+
+.nav-container ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row-reverse;
+} 
+
+.nav-container li {
+    /* display: inline-block; */
+    list-style: none;
+    /* margin-left: 4em;
+    margin-right: 2em;
+    margin-top: 2em;
+    margin-bottom: 1em; */
+    margin: 2em 2em 1em 4em;
+    /* float: right; */
+  
+    /* position: relative; */
+}
+
+.nav-container a {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: grey;
+    font-weight: bold;
+}
+
+body{
+    padding-top: 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 80%; */
+}
+.fetchStockButton{
+    margin-top: 10px;
+}
+#stockTickerInput{
+    width: 40%;
+}
+
+/* #stockTickerResponse{
+    width: 50%;
+    height: 80%
+} */

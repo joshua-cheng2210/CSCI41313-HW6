@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Map and Geocoder used to place marker with infoWindow - testing</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="myschedule.css">
+    <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#maps {
+			height: 50%;
+			margin-left: 10%;
+			margin-right: 10%;
+			margin-top: 10%;
+		}
+		#floating-panel {
+			position: relative;
+			margin-left: 10%;
+			margin-right: 10%;
+  			background-color: #fff;
+			padding: 5px;
+			text-align: center;
+			font-family: 'Roboto','sans-serif';
+			line-height: 30px;
+			padding-left: 10px;
+		}	
+    </style>
+	<script type="module" src="testing.js"></script>
+  </head>
+  <body>
+    <div>
+        <nav class="nav-container">
+            <nav>
+              <ul>
+                <li><a href="aboutme.html">About Me</a></li>
+                <li><a href="myschedule.html">mySchedule</a></li>
+                <li><a href="myform.html">myForm</a></li>
+            </ul>
+            </nav>
+        </nav>
+    </div>
+    <h1>My Weekly Schedule</h1>
+    <div class="schedule-picture-container" >
+        <table class="schedule-table">
+            <thead class="schedule-head">
+                <tr class="schedule-row">
+                    <th>Day</th>
+                    <th>Event</th>
+                    <th>Time</th>
+                    <th>Event Location (Virtual or Physical)</th>
+                    <th>Phone Number</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            
+            <tr class="schedule-row" onmouseover="changeScheduleIMG('schedule-image', this.getAttribute('data-thumbnail'), this.getAttribute('data-thumbnail-alt'))" data-thumbnail="/img/Anderson.jpg" data-thumbnail-alt="web dev">
+                <th>Monday</th>
+                <th>CSCI 4131 lec</th>
+                <th>11:15am - 12:30pm</th>
+                <th>anderson hall<br><img src="/img/Anderson.jpg" class="location-thumbnail" alt="anderson hall"></th>
+                <th>No Phone number</th>
+                <th><a href="https://umtc.catalog.prod.coursedog.com/courses/7906541">CSCI 4131 info</a></th>
+            </tr>
+        </table>
+
+        <img id="schedule-image" src="https://media4.giphy.com/media/3ov9k0e23zJW5JSoO4/giphy.gif?cid=6c09b952vivl50uk7pa62o18szm4atmd8szie8v7z3xyz5bi&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="UMN gopher">
+    </div>
+
+	<div id="maps"></div>
+    <div id="map" style="height: 500px; width: 100%; border: 2px solid black;"></div>
+	
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k],
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "AIzaSyCYPpnJXeqE1u8ovl_UMJ1n-M0PsDAvzaQ",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+      });
+    </script>
+  </body>
+</html>

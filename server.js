@@ -1,0 +1,168 @@
+const http = require('http');
+const url = require('url');
+const fs = require('fs');
+const express = require("express");
+const app = express(); 
+const path = require('path');
+
+app.use(express.json()); 
+app.use(express.urlencoded({extended:true}));
+const port = 7647
+
+var mysql = require("mysql");
+let connection = null
+
+const mysqlConfig = {
+  host: "cse-mysql-classes-01.cse.umn.edu",
+  user: "C4131S25S01U12",
+  password: "194",
+  database: "C4131S25S01U12",
+  port: 3306
+}
+DB = mysql.createConnection(mysqlConfig);
+
+
+app.get('/getSchedule', (req, res) => {
+  console.log("getting schedule")
+  const sql = 'SELECT * FROM schedule ORDER BY day, start';
+  DB.query(sql, (err, results) => {
+    if (err) {
+      console.error("Database select error:", err);
+      return res.status(500).json({ success: false , results: Null});
+    }
+    console.log("results form server: ", results.length, results)
+    return res.status(200).json({ success: true, results: results }); 
+  });
+});
+
+
+app.post('/addSchedule', (req, res) => {
+  console.log("req.body: ", req.body)
+  const {event, day, start, end, phone, location, url} = req.body; 
+  const sql = 'INSERT INTO schedule (event, day, start, end, phone, location, url) VALUES (?, ?, ?, ?, ?, ?, ?)'; // prevent sql injections
+  const values = [
+    event || null,
+    day || null,
+    start ? start + ':00' : null, 
+    end ? end + ':00' : null, 
+    phone || null,
+    location || null,
+    url || null
+  ];
+
+  DB.query(sql, values, (err, results) => {
+    if (err) {
+      return res.status(500).json({ success: false});
+    } else {
+      return res.status(200).json({ success: true});
+    }
+  });
+});
+
+app.delete('/deleteSchedule/:id', (req, res) => {
+  const scheduleID = req.params.id;
+  console.log("scheduleID: ", scheduleID)
+
+  DB.query(`DELETE FROM schedule WHERE id = ?`, scheduleID, (err, result) => {
+      if (err) {
+        console.log("failed to removed ", scheduleID)
+          res.status(500).json({ success: false});
+      } else if (result.affectedRows > 0) {
+        console.log("successfully removed ", scheduleID)
+        res.status(200).json({ success: true});
+      } else {
+        console.log("failed to removed ", scheduleID)
+        res.status(404).json({ success: false});
+      }
+  });
+});
+
+
+app.use(express.static(path.join(__dirname, 'static')));
+app.get('/aboutme.html', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'html', 'aboutme.html'));
+});
+app.get('/aboutme.css', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'css', 'aboutme.css'));
+});
+app.get('/aboutme.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'js', 'aboutme.js'));
+});
+
+app.get('/myschedule.html', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'html', 'myschedule.html'));
+});
+app.get('/myschedule.css', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'css', 'myschedule.css'));
+});
+app.get('/myschedule.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'js', 'myschedule.js'));
+});
+
+app.get('/myform.html', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'html', 'myform.html'));
+});
+app.get('/myform.css', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'css', 'myform.css'));
+});
+app.get('/myform.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'js', 'myform.js'));
+});
+
+app.get('/stocks.html', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'html', 'stocks.html'));
+});
+app.get('/stocks.css', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, 'static', 'css', 'stocks.css'));
+});
+app.get('/stocks.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'js', 'stocks.js'));
+});
+
+
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'static', 'html', '404.html'));
+});
+
+app.listen(port, () => {
+  console.log(`server listening on http://localhost:${port}/`)
+});
+
+// const fileRoutes = [
+//   { url: "/aboutme.html", contentType: "text/html", filePath: "static/html/aboutme.html" },
+//   { url: "/myschedule.html", contentType: "text/html", filePath: "static/html/myschedule.html" },
+//   { url: "/myform.html", contentType: "text/html", filePath: "static/html/myform.html" },
+//   { url: "/stocks.html", contentType: "text/html", filePath: "static/html/stocks.html" },
+//   { url: "/aboutme.js", contentType: "text/javascript", filePath: "static/js/aboutme.js" },
+//   { url: "/myschedule.js", contentType: "text/javascript", filePath: "static/js/myschedule.js" },
+//   { url: "/map.js", contentType: "text/javascript", filePath: "static/js/map.js" },
+//   { url: "/myform.js", contentType: "text/javascript", filePath: "static/js/myform.js" },
+//   { url: "/stocks.js", contentType: "text/javascript", filePath: "static/js/stocks.js" },
+//   { url: "/aboutme.css", contentType: "text/css", filePath: "static/css/aboutme.css" },
+//   { url: "/myschedule.css", contentType: "text/css", filePath: "static/css/myschedule.css" },
+//   { url: "/myform.css", contentType: "text/css", filePath: "static/css/myform.css" },
+//   { url: "/stocks.css", contentType: "text/css", filePath: "static/css/stocks.css" },
+//   { url: "/css/style.css", contentType: "text/css", filePath: "static/css/style.css" }, 
+//   { url: "/myImg/flag.png", contentType: "image/png", filePath: "static/img/flag.png" },
+//   { url: "/myImg/map.png", contentType: "image/png", filePath: "static/img/map.png" },
+//   { url: "/myImg/my dog sunbathing.jpg", contentType: "image/jpg", filePath: "static/img/my dog sunbathing.jpg" },
+//   { url: "/myImg/travel.jpg", contentType: "image/jpg", filePath: "static/img/travel.jpg" },
+//   { url: "/myImg/washington_back.jpg", contentType: "image/jpg", filePath: "static/img/washington_back.jpg" },
+//   { url: "/myImg/washington.jpg", contentType: "image/jpg", filePath: "static/img/washington.jpg" },
+//   { url: "/myImg/with_my_dawg.jpg", contentType: "image/jpg", filePath: "static/img/with_my_dawg.jpg" },
+//   { url: "/myImg/skii.mp4", contentType: "video/mp4", filePath: "static/img/skii.mp4" },
+//   { url: "/img/gophers-mascot.png", contentType: "image/png", filePath: "static/img/gophers-mascot.png" },
+//   { url: "/img/Dan1.jpeg", contentType: "image/jpeg", filePath: "static/img/Dan1.jpeg" },
+//   { url: "/img/Anderson.jpg", contentType: "image/jpeg", filePath: "static/img/Anderson.jpg" },
+//   { url: "/img/goldy.jpg", contentType: "image/jpeg", filePath: "static/img/goldy.jpg" },
+//   { url: "/img/childrens_rehab.jpg", contentType: "image/jpeg", filePath: "static/img/childrens_rehab.jpg" },
+//   { url: "/img/rec.jpg", contentType: "image/jpeg", filePath: "static/img/rec.jpg" },
+//   { url: "/img/Bruininks.jpg", contentType: "image/jpeg", filePath: "static/img/Bruininks.jpg" },
+//   { url: "/img/Lind.png", contentType: "image/png", filePath: "static/img/Lind.png" },
+//   { url: "/img/zoom.jpg", contentType: "image/jpeg", filePath: "static/img/zoom.jpg" },
+//   { url: "/img/vanCleve.jpg", contentType: "image/jpeg", filePath: "static/img/vanCleve.jpg" },
+//   { url: "/img/breakfast.jpg", contentType: "image/jpeg", filePath: "static/img/breakfast.jpg" },
+//   { url: "/img/track.jpg", contentType: "image/jpeg", filePath: "static/img/track.jpg" },
+
+//   { url: "*", contentType: "text/html", filePath: "static/html/404.html" } 
+// ];
