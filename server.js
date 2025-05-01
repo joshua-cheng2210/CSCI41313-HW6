@@ -124,7 +124,7 @@ app.get('/stocks.js', (req, res) => {
 app.get('/editSchedule/:id', (req, res) => {
   const eventId = req.params.id;
 	console.log("Get id: " + eventId);
-  const eventInfo = {id : eventId,
+  const eventInfo = {id : eventId, // TODO: update this according to your schedule table or what it is called in your sql
     name : "VA Kant",
     address: "123 Lakeview Drive",
     info: "Mr Kant is a 4131 instructor",
