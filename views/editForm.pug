@@ -28,36 +28,36 @@ html(lang="en")
             th
               label(for="event") Event
             th
-              input#event(type="text", pattern="[A-Za-z0-9\\s]+", name="event", title="Event must be alphanumeric", required)
+              input#event(type="text", pattern="[A-Za-z0-9\\s]+", name="event", title="Event must be alphanumeric", required, value=event)
           tr
             th
               label(for="startTime") Start Time:
             th
-              input#startTime(name="startTime", type="time", required)
+              input#startTime(name="startTime", type="time", required, value=start)
           tr
             th
               label(for="endTime") End Time:
             th
-              input#endTime(name="endTime", type="time", required)
+              input#endTime(name="endTime", type="time", required, value=end)
           tr
             th
               label(for="location") Event Location (Virtual or Physical):
             th
-              input#location(type="text", pattern="[A-Za-z0-9\\s]+", name="location", title="Event must be alphanumeric", required)
+              input#location(type="text", pattern="[A-Za-z0-9\\s]+", name="location", title="Event must be alphanumeric", required, value=location)
           tr
             th
               label(for="phone") Phone Number:
             th
-              input#phone(type="text", name="phone", pattern="[0-9]{10}", title="Phone number must contain 10 digits", required)
+              input#phone(type="text", name="phone", pattern="[0-9]{10}", title="Phone number must contain 10 digits", required, value=phone)
           tr
             th
               label(for="url") event info URL:
             th
-              input#url(type="url", name="url", required)
+              input#url(type="url", name="url", required, value=url)
           tr
             th
             th
-              input.submit-button(type="submit", value="Add Event")
+              input.submit-button(type="submit", value="Update Event")
         script(src="myform.js")
 
 // TODO: decide whether to sent an update sql query from the front end or the back end
