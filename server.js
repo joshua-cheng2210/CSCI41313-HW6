@@ -84,10 +84,11 @@ app.get('/editSchedule/:id', (req, res) => {
 	console.log("Get id: " + scheduleID);
 
   //validating the ID
-  const sql = "select * fro schedule where id = ?"
+  const sql = "select * from schedule where id = ?"
   DB.query(sql, scheduleID, (err, result) => {
-    if (err || results.length > 1) {
+    if (err || result.length > 1) {
       console.log("attempting to edit invalid schedule ID")
+      // console.log(err)
     } else {
       console.log("result from editSchedule: ", result)
       // TODO: update this according to your schedule table or what it is called in your sql
