@@ -199,6 +199,7 @@ async function deleteSchedule(id, buttonElement) {
 }
 
 async function editSchedule(id, buttonElement) {
+    console.log("client edit schedule: ", id)
     const editUrl = `/editSchedule/${id}`;
     window.location.href = editUrl;
 }
