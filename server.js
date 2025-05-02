@@ -91,6 +91,7 @@ app.get('/editSchedule/:id', (req, res) => {
       // console.log(err)
     } else {
       console.log("result from editSchedule: ", result)
+      result = result[0]
       console.log("result from editSchedule: ", result.event)
       console.log("result from editSchedule: ", result.day)
       console.log("result from editSchedule: ", result.start)
