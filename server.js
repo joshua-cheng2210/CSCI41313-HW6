@@ -80,16 +80,33 @@ app.delete('/deleteSchedule/:id', (req, res) => {
   });
 });
 app.get('/editSchedule/:id', (req, res) => {
-  const eventId = req.params.id;
-	console.log("Get id: " + eventId);
-  const eventInfo = {id : eventId, // TODO: update this according to your schedule table or what it is called in your sql
-    name : "VA Kant",
-    address: "123 Lakeview Drive",
-    info: "Mr Kant is a 4131 instructor",
-    email: "vakant@umn.edu",
-    url: "www.umn.edu",
-   }
-  res.render(path.join(__dirname, 'views', 'editForm.pug'), eventInfo);
+  const scheduleID = req.params.id;
+	console.log("Get id: " + scheduleID);
+
+  //validating the ID
+  const sql = "select * fro schedule where id = ?"
+  DB.query(sql, scheduleID, (err, result) => {
+    if (err || results.length > 1) {
+      console.log("attempting to edit invalid schedule ID")
+    } else {
+      console.log("result from editSchedule: ", result)
+      // TODO: update this according to your schedule table or what it is called in your sql
+      return res.render(path.join(__dirname, 'views', 'editForm.pug'), result);
+    }
+  })
+
+
+  // const eventInfo = {
+  //   id : scheduleID, 
+  //   name : "VA Kant",
+  //   address: "123 Lakeview Drive",
+  //   info: "Mr Kant is a 4131 instructor",
+  //   email: "vakant@umn.edu",
+  //   url: "www.umn.edu",
+
+  //   // event, day, start, end, phone, location, url
+  //  }
+  // res.render(path.join(__dirname, 'views', 'editForm.pug'), eventInfo);
 });
 
 
