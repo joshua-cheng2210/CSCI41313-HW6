@@ -79,6 +79,18 @@ app.delete('/deleteSchedule/:id', (req, res) => {
       }
   });
 });
+app.get('/editSchedule/:id', (req, res) => {
+  const eventId = req.params.id;
+	console.log("Get id: " + eventId);
+  const eventInfo = {id : eventId, // TODO: update this according to your schedule table or what it is called in your sql
+    name : "VA Kant",
+    address: "123 Lakeview Drive",
+    info: "Mr Kant is a 4131 instructor",
+    email: "vakant@umn.edu",
+    url: "www.umn.edu",
+   }
+  res.render(path.join(__dirname, 'views', 'editForm.pug'), eventInfo);
+});
 
 
 app.use(express.static(path.join(__dirname, 'static')));
@@ -120,18 +132,6 @@ app.get('/stocks.css', (req, res) => {
 });
 app.get('/stocks.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'static', 'js', 'stocks.js'));
-});
-app.get('/editSchedule/:id', (req, res) => {
-  const eventId = req.params.id;
-	console.log("Get id: " + eventId);
-  const eventInfo = {id : eventId, // TODO: update this according to your schedule table or what it is called in your sql
-    name : "VA Kant",
-    address: "123 Lakeview Drive",
-    info: "Mr Kant is a 4131 instructor",
-    email: "vakant@umn.edu",
-    url: "www.umn.edu",
-   }
-  res.render(path.join(__dirname, 'views', 'editForm.pug'), eventInfo);
 });
 
 app.use((req, res, next) => {

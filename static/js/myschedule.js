@@ -183,7 +183,6 @@ function stopSlideshow() {
 }
 
 async function deleteSchedule(id, buttonElement) {
-   
     try {
         const response = await fetch(`/deleteSchedule/${id}`, { 
             method: 'DELETE',
@@ -197,6 +196,11 @@ async function deleteSchedule(id, buttonElement) {
     } catch (err) {
         throw err
     }
+}
+
+async function editSchedule(id, buttonElement) {
+    const editUrl = `/editSchedule/${id}`;
+    window.location.href = editUrl;
 }
 
 async function populateScheduleTable() {
@@ -226,6 +230,7 @@ async function populateScheduleTable() {
                 <td>${schedule.phone || 'N/A'}</td>
                 <td><a href="${schedule.url || '#'}" target="_blank">${schedule.event || 'Info'}</a></td>
                 <td>
+                    <button class="edit-button" onclick="editSchedule(${schedule.id}, this)">Edit</button>
                     <button class="delete-button" onclick="deleteSchedule(${schedule.id}, this)">Delete</button>
                 </td>
             `;
@@ -234,8 +239,7 @@ async function populateScheduleTable() {
 
     } catch (err) {
         throw err
-}
-
+    }
 }
 document.addEventListener('DOMContentLoaded', () => {
     populateScheduleTable()
