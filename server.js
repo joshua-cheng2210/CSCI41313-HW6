@@ -90,6 +90,7 @@ app.get('/editSchedule/:id', (req, res) => {
       console.log("attempting to edit invalid schedule ID")
       // console.log(err)
     } else {
+      console.log("result from editSchedule: ", result)
       console.log("result from editSchedule: ", result.event)
       console.log("result from editSchedule: ", result.day)
       console.log("result from editSchedule: ", result.start)
