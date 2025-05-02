@@ -90,7 +90,13 @@ app.get('/editSchedule/:id', (req, res) => {
       console.log("attempting to edit invalid schedule ID")
       // console.log(err)
     } else {
-      console.log("result from editSchedule: ", result)
+      console.log("result from editSchedule: ", result.event)
+      console.log("result from editSchedule: ", result.day)
+      console.log("result from editSchedule: ", result.start)
+      console.log("result from editSchedule: ", result.end)
+      console.log("result from editSchedule: ", result.phone)
+      console.log("result from editSchedule: ", result.location)
+      console.log("result from editSchedule: ", result.url)
       // TODO: update this according to your schedule table or what it is called in your sql
       return res.render(path.join(__dirname, 'views', 'editForm.pug'), result);
     }
