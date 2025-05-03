@@ -135,7 +135,7 @@ app.post('/updateSchedule/:id', (req, res) => {
 
   DB.query(sql, values, (err, result) => {
     if (err) {
-      console.log("update event fail")
+      console.log("update event fail.", err)
       return res.status(404).json({ success: false});
     }
 
