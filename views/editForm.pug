@@ -9,7 +9,7 @@ html(lang="en")
   body
     div.filling-form
       h1 Edit Schedule
-      form#updateSchedule-form(data-id=scheduleID)
+      form#updateSchedule-form(data-id=id)
         table
           tr
             th
@@ -55,7 +55,7 @@ html(lang="en")
               input#url(type="url", name="url", required, value=url)
           tr
             th
-              span#schedule-id-display= scheduleID
+              span#schedule-id-display= id
             th
               input.submit-button(type="submit", value="Update Event")
         script(src="/js/updateScheduleForm.js")
