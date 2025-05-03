@@ -14,8 +14,10 @@ async function onSubmit(event){
     if (!validateForm()) {
         return; 
     }
-    const form = event.target;
-    const scheduleId = form.dataset.id;
+    // const form = event.target;
+    // const scheduleId = form.dataset.id;
+    const scheduleIdElement = document.getElementById('schedule-id-display');
+    const scheduleId = scheduleIdElement ? scheduleIdElement.textContent : null;
     
     const eventName = document.getElementById('event').value; 
     const day = document.getElementById('day').value;
