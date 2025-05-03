@@ -201,7 +201,7 @@ async function deleteSchedule(id, buttonElement) {
 async function editSchedule(id) {
     console.log("client edit schedule: ", id)
     const editUrl = `/editSchedule/${id}`;
-    window.location.href = editUrl;
+    window.location.href = editUrl; // this is a get function but from the browser
 }
 
 async function populateScheduleTable() {
