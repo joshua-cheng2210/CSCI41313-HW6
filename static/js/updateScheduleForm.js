@@ -38,6 +38,7 @@ async function onSubmit(event){
     };
 
     try {
+        console.log(`on client update schedule form :     /updateSchedule/${scheduleId}`)
         const response = await fetch(`/updateSchedule/${scheduleId}`, { 
             method: 'POST',
             headers: {
