@@ -79,6 +79,7 @@ app.delete('/deleteSchedule/:id', (req, res) => {
       }
   });
 });
+
 app.get('/editSchedule/:id', (req, res) => {
   const scheduleID = req.params.id;
 	console.log("Get id: " + scheduleID);
@@ -92,32 +93,51 @@ app.get('/editSchedule/:id', (req, res) => {
     } else {
       console.log("result from editSchedule: ", result)
       result = result[0]
-      console.log("result from editSchedule: ", result.event)
-      console.log("result from editSchedule: ", result.day)
-      console.log("result from editSchedule: ", result.start)
-      console.log("result from editSchedule: ", result.end)
-      console.log("result from editSchedule: ", result.phone)
-      console.log("result from editSchedule: ", result.location)
-      console.log("result from editSchedule: ", result.url)
+      // console.log("result from editSchedule: ", result.event)
+      // console.log("result from editSchedule: ", result.day)
+      // console.log("result from editSchedule: ", result.start)
+      // console.log("result from editSchedule: ", result.end)
+      // console.log("result from editSchedule: ", result.phone)
+      // console.log("result from editSchedule: ", result.location)
+      // console.log("result from editSchedule: ", result.url)
       // TODO: update this according to your schedule table or what it is called in your sql
       return res.render(path.join(__dirname, 'views', 'editForm.pug'), result);
     }
   })
-
-
-  // const eventInfo = {
-  //   id : scheduleID, 
-  //   name : "VA Kant",
-  //   address: "123 Lakeview Drive",
-  //   info: "Mr Kant is a 4131 instructor",
-  //   email: "vakant@umn.edu",
-  //   url: "www.umn.edu",
-
-  //   // event, day, start, end, phone, location, url
-  //  }
-  // res.render(path.join(__dirname, 'views', 'editForm.pug'), eventInfo);
 });
 
+app.post('/updateSchedule/:id', (req, res) => {
+  const scheduleID = req.params.id;
+  const newData = req.body;
+
+  console.log(`Received PUT request for ID: ${scheduleID}`);
+  console.log('Updated data:', newData);
+
+  const sql = `UPDATE schedule SET
+                 event = ?, day = ?, start = ?, end = ?,
+                 phone = ?, location = ?, url = ?
+               WHERE id = ?`;
+
+  const values = [
+    newData.event,
+    newData.day,
+    newData.start,
+    newData.end,
+    newData.phone,
+    newData.location,
+    newData.url,
+    scheduleID
+  ];
+
+  DB.query(sql, values, (err, result) => {
+    if (err) {
+      return res.status(404).json({ success: false});
+    }
+
+    console.log("Update successful for ID:", scheduleID);
+    return res.status(200).json({ success: true});
+  });
+});
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.get('/aboutme.html', (req, res) => {

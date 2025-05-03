@@ -9,7 +9,7 @@ html(lang="en")
   body
     div.filling-form
       h1 Edit Schedule
-      form#schedule-form
+      form#updateSchedule-form
         table
           tr
             th
@@ -58,6 +58,4 @@ html(lang="en")
             th
             th
               input.submit-button(type="submit", value="Update Event")
-        //- script(src="myform.js")
-
-// TODO: decide whether to sent an update sql query from the front end or the back end
+        script(src="../static/js/updateScheduleForm.js")

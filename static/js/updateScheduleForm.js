@@ -36,7 +36,7 @@ async function onSubmit(event){
     };
 
     try {
-        const response = await fetch('/addSchedule', { 
+        const response = await fetch('/updateSchedule', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', 
@@ -52,7 +52,7 @@ async function onSubmit(event){
         const result = await response.json(); 
 
         if (result.success) {
-            // alert('schedule added :) view it in /myschedule.js');
+            alert('schedule added :) view it in /myschedule.js');
             window.location.href = '/myschedule.html'
         } 
 
@@ -62,7 +62,7 @@ async function onSubmit(event){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById("schedule-form")
+    const form = document.getElementById("updateSchedule-form")
     if (form){
         form.addEventListener("submit", onSubmit)
     }
