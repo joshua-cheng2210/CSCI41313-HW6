@@ -14,6 +14,8 @@ async function onSubmit(event){
     if (!validateForm()) {
         return; 
     }
+    const form = event.target;
+    const scheduleId = form.dataset.id;
     
     const eventName = document.getElementById('event').value; 
     const day = document.getElementById('day').value;
@@ -36,7 +38,7 @@ async function onSubmit(event){
     };
 
     try {
-        const response = await fetch('/updateSchedule', { 
+        const response = await fetch(`/updateSchedule/${scheduleId}`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', 
