@@ -106,6 +106,10 @@ app.get('/editSchedule/:id', (req, res) => {
   })
 });
 
+app.get('/updateScheduleForm.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'js', 'updateScheduleForm.js'));
+});
+
 app.post('/updateSchedule/:id', (req, res) => {
   const scheduleID = req.params.id;
   const newData = req.body;
