@@ -82,7 +82,7 @@ app.delete('/deleteSchedule/:id', (req, res) => {
 
 app.get('/editSchedule/:id', (req, res) => {
   const scheduleID = req.params.id;
-	console.log("Get id: " + scheduleID);
+	console.log("editSchedule id: " + scheduleID);
 
   //validating the ID
   const sql = "select * from schedule where id = ?"
@@ -114,8 +114,7 @@ app.post('/updateSchedule/:id', (req, res) => {
   const scheduleID = req.params.id;
   const newData = req.body;
 
-  console.log(`Received POST request for ID: ${scheduleID}`);
-  console.log('Updated data:', newData);
+  console.log(`updateScheduleForm for ID: ${scheduleID}`);
 
   const sql = `UPDATE schedule SET
                  event = ?, day = ?, start = ?, end = ?,
@@ -135,11 +134,11 @@ app.post('/updateSchedule/:id', (req, res) => {
 
   DB.query(sql, values, (err, result) => {
     if (err) {
-      console.log("update event fail.", err)
+      console.log("fail update.", err)
       return res.status(404).json({ success: false});
     }
 
-    console.log("Update successful for ID:", scheduleID);
+    console.log("successful update:", scheduleID);
     return res.status(200).json({ success: true});
   });
 });
