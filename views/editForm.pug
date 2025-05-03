@@ -16,14 +16,13 @@ html(lang="en")
               label(for="day") Day
             th
               select#day(name="day", required)
-                option(value="", disabled, selected) Select a day
-                option(value="Sun") Sunday
-                option(value="Mon") Monday
-                option(value="Tue") Tuesday
-                option(value="Wed") Wednesday
-                option(value="Thu") Thursday
-                option(value="Fri") Friday
-                option(value="Sat") Saturday
+                option(value="Sun", selected=(day === 'Sun')) Sunday
+                option(value="Mon", selected=(day === 'Mon')) Monday
+                option(value="Tue", selected=(day === 'Tue')) Tuesday
+                option(value="Wed", selected=(day === 'Wed')) Wednesday
+                option(value="Thu", selected=(day === 'Thu')) Thursday
+                option(value="Fri", selected=(day === 'Fri')) Friday
+                option(value="Sat", selected=(day === 'Sat')) Saturday
           tr 
             th
               label(for="event") Event
