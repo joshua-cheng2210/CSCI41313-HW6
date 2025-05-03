@@ -114,7 +114,7 @@ app.post('/updateSchedule/:id', (req, res) => {
   const scheduleID = req.params.id;
   const newData = req.body;
 
-  console.log(`Received PUT request for ID: ${scheduleID}`);
+  console.log(`Received POST request for ID: ${scheduleID}`);
   console.log('Updated data:', newData);
 
   const sql = `UPDATE schedule SET
@@ -135,6 +135,7 @@ app.post('/updateSchedule/:id', (req, res) => {
 
   DB.query(sql, values, (err, result) => {
     if (err) {
+      console.log("update event fail")
       return res.status(404).json({ success: false});
     }
 
